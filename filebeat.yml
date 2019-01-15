@@ -5,6 +5,10 @@ filebeat.prospectors:
     paths:
       - /home/logs/laravel/*.log
     # document_type 可能因为 Filebeat版本问题需要更新，用 fileds 字段处理
+    fields_under_root: true
+    fields:
+      ip: "127.0.0.8"
+      server_name: "测试服务器"
     document_type: "laravel"
     # laravel 日志多行合并配置
     multiline.pattern: '^\[[0-9]{4}-[0-9]{2}-[0-9]{2}'
@@ -14,7 +18,18 @@ filebeat.prospectors:
   - input_type: log
     paths:
       - /home/logs/*.log
+    fields_under_root: true
+    fields:
+      # 自定义字段，可以添加例如 ip，表示来自哪个服务器
+      ip: "127.0.0.7"
+      server_name: "正式服务器"
 output.logstash:
   hosts: ["172.17.0.2:5044"]
+
+# 规避数据热点的优化参数：
+# 积累1024条消息才上报
+spool_size: 1024
+# 或者空闲5s上报
+idle_timeout: "5s"
 #filebeat.config.modules:
 #   path: ${path.config}/modules.d/*.yml

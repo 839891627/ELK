@@ -26,18 +26,6 @@
   > 客户端使用 `filebeat` 来搜集日志
 1. `docker pull prima/filebeat`
 1. 配置文件 `filebeat.yml`
-    ```yml
-        #filebeat.modules:
-        #  - module: system
-        filebeat.prospectors:
-          - type: log
-            paths:
-              - /home/logs/*.log
-        output.logstash:
-            hosts: ["ip:5044"]
-        #filebeat.config.modules:
-        #   path: ${path.config}/modules.d/*.yml
-    ```
 1. 创建并启动容器 
     ```bash
     docker run -d -v  /path/ELK/filebeat.yml:/filebeat.yml --name filebeat prima/filebeat
