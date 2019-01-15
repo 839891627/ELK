@@ -42,7 +42,8 @@
     ```bash
     docker run -d -v  /path/ELK/filebeat.yml:/filebeat.yml --name filebeat prima/filebeat
     ```
+    
+### 本地命令备份    
+docker run -d -v /Users/caojinliang/Develop/ElK/logstash/conf.d:/etc/logstash/conf.d -p 5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk
+docker run -d -v  /Users/caojinliang/Develop/ELK/filebeat.yml:/filebeat.yml -v /Users/caojinliang/Develop/ELK/logs:/home/logs --name filebeat prima/filebeat
 
-### todo
-- [] 各种日志的搜集配置
-- [] docker file    

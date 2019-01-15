@@ -1,0 +1,9 @@
+[2019-01-13 12:02:26] local.INFO: 用户参与活动失败，活动代号：not_sign。 用户id:48 超过参与活动id：7次数上限！
+[2019-01-13 12:02:38] local.INFO: 用户参与活动失败，活动代号：not_sign。 用户id:111 超过参与活动id：7次数上限！
+[2019-01-13 18:15:10] local.ERROR: Type error: Too few arguments to function Illuminate\Console\Command::info(), 0 passed in /Users/caojinliang/Develop/naqujia/app/Console/Commands/Nqj/Coupon/ManualSendCoupon.php on line 49 and at least 1 expected {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Type error: Too few arguments to function Illuminate\\Console\\Command::info(), 0 passed in /Users/caojinliang/Develop/naqujia/app/Console/Commands/Nqj/Coupon/ManualSendCoupon.php on line 49 and at least 1 expected at /Users/caojinliang/Develop/naqujia/vendor/laravel/framework/src/Illuminate/Console/Command.php:427)
+[stacktrace]
+#0 /Users/caojinliang/Develop/naqujia/app/Console/Commands/Nqj/Coupon/ManualSendCoupon.php(49): Illuminate\\Console\\Command->info()
+#1 [internal function]: App\\Console\\Commands\\Nqj\\Coupon\\ManualSendCoupon->handle()
+#2 /Users/caojinliang/Develop/naqujia/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#3 /Users/caojinliang/Develop/naqujia/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+
