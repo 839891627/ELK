@@ -1,0 +1,10 @@
+#filebeat.modules:
+#  - module: system
+filebeat.prospectors:
+  - type: log
+    paths:
+      - /home/logs/*.log
+output.logstash:
+    hosts: ["172.17.0.2:5044"]
+#filebeat.config.modules:
+#   path: ${path.config}/modules.d/*.yml

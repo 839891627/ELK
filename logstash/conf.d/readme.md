@@ -1,0 +1,1 @@
+容器中 `/opt/logstash/config/startoption.yml 中定义的加载配置目录`
