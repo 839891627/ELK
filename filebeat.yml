@@ -3,11 +3,11 @@
 filebeat.prospectors:
   - input_type: log
     paths:
-      - /home/logs/laravel/*.log
+      # 这里一定要挂载目录，坑我好长时间。。。 这里容器里面的目录
+      - /home/logs/*.log
     # document_type 可能因为 Filebeat版本问题需要更新，用 fileds 字段处理
     fields_under_root: true
     fields:
-      ip: "127.0.0.8"
       server_name: "测试服务器"
     document_type: "laravel"
     # laravel 日志多行合并配置
@@ -15,16 +15,8 @@ filebeat.prospectors:
     multiline.negate: true
     multiline.match: after
 
-  - input_type: log
-    paths:
-      - /home/logs/*.log
-    fields_under_root: true
-    fields:
-      # 自定义字段，可以添加例如 ip，表示来自哪个服务器
-      ip: "127.0.0.7"
-      server_name: "正式服务器"
 output.logstash:
-  hosts: ["172.17.0.2:5044"]
+  hosts: ["ip:5044"]
 
 # 规避数据热点的优化参数：
 # 积累1024条消息才上报

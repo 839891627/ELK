@@ -28,10 +28,39 @@
 1. 配置文件 `filebeat.yml`
 1. 创建并启动容器 
     ```bash
-    docker run -d -v  /path/ELK/filebeat.yml:/filebeat.yml --name filebeat prima/filebeat
+    docker run -d -v  /data/wwwroot/filebeat/filebeat.yml:/filebeat.yml -v /path/需要搜集的日志目录/logs:/home/logs --restart=always --name filebeat prima/filebeat
+    ```
+    
+## 通过nginx认证登录kibana
+1. `yum install httpd-tools -y`
+1. `htpasswd -c -b /usr/local/nginx/conf/passwd/kibana.passwd username passwd`
+1. nginx配置：
+    ```
+    server {
+          listen       80;
+          server_name kibana.jt.com;
+          #proxy_connect_timeout 6500s;
+          location / {
+             #proxy_connect_timeout 6500s;
+             #proxy_read_timeout 6500s;
+             auth_basic "secret";
+             auth_basic_user_file /usr/local/nginx/conf/kibana.passwd;
+             proxy_pass http://127.0.0.1:5601;
+             proxy_set_header Host $host:5601;
+             proxy_set_header X-Real-IP $remote_addr;
+             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+             proxy_set_header Via "nginx";
+          }
+          access_log off
+    }
+    ```
+1. 同时需要配置 `/opt/kibana/config/kibana.yml`;
+    ```
+    # 只允许本地访问
+    server.host: "localhost"
     ```
     
 ### 本地命令备份    
-docker run -d -v /Users/caojinliang/Develop/ElK/logstash/conf.d:/etc/logstash/conf.d -p 5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk
-docker run -d -v  /Users/caojinliang/Develop/ELK/filebeat.yml:/filebeat.yml -v /Users/caojinliang/Develop/ELK/logs:/home/logs --name filebeat prima/filebeat
+docker run -d -v /root/ELK/logstash/conf.d:/etc/logstash/conf.d -p 5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk
+docker run -d -v  /data/wwwroot/filebeat/filebeat.yml:/filebeat.yml -v /data/wwwroot/lyq.naqujia/storage/logs:/home/logs --restart=always --name filebeat prima/filebeat
 
