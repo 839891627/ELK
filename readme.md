@@ -9,6 +9,7 @@
 ## 服务端
 ### 安装 ELK
   > 这里使用 `sebp/elk` 镜像来安装
+  
 1. `docker pull sebp/elk:651`
 1. `docker run -d -v /path/ElK/logstash/conf.d:/etc/logstash/conf.d -p 127.0.0.1:5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk:651`    
     > - 5601 (Kibana web interface). 这里做了 5601端口本地的映射限制，是为了搭配后面nginx的认证（如果不需要，则去掉 127.0.0.1）
@@ -21,6 +22,7 @@
 ## 客户端
 ### filebeat 安装    
   > 客户端使用 `filebeat` 来搜集日志
+  
 1. `docker pull prima/filebeat:6.4.2`
 1. 配置文件 `filebeat.yml`
 1. 创建并启动容器 
@@ -29,8 +31,8 @@
     ```
     
 ## 通过nginx认证登录kibana
-1. `yum install httpd-tools -y`
-1. `htpasswd -c -b /usr/local/nginx/conf/passwd/kibana.passwd username passwd`
+1. 安装 apache 工具： `yum install httpd-tools -y`
+1. 生成密码配置文件： `htpasswd -c -b /usr/local/nginx/conf/passwd/kibana.passwd username passwd`  
 1. nginx配置：
     ```
     server {
@@ -52,7 +54,8 @@
     }
     ```
 1. ~~同时需要配置 `/opt/kibana/config/kibana.yml`;~~
-    > 不在需要。因为都创建 elk 容器的时候，指定了 `127.0.0.1:5601` 端口的映射
+    > 不再需要。因为都创建 elk 容器的时候，指定了 `127.0.0.1:5601` 端口的映射
+    
     ```
     # 只允许本地访问
     server.host: "localhost"
@@ -64,6 +67,8 @@
 1. `cd /opt/elasticsearch/bin`
 1. `elasticsearch-plugin install  xxx`
     
+
+    
 ### 本地命令备份    
-docker run -d -v /Users/caojinliang/Develop/ELK/logstash/conf.d:/etc/logstash/conf.d -p 5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk:651
-docker run -d -v /Users/caojinliang/Develop/ELK/filebeat.yml:/filebeat.yml -v /Users/caojinliang/Develop/ELK/logs:/home/logs --restart=always --name filebeat prima/filebeat:6.4.2
+- docker run -d -v /Users/caojinliang/Develop/ELK/logstash/conf.d:/etc/logstash/conf.d -p 5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk:651
+- docker run -d -v /Users/caojinliang/Develop/ELK/filebeat.yml:/filebeat.yml -v /Users/caojinliang/Develop/ELK/logs:/home/logs --restart=always --name filebeat prima/filebeat:6.4.2
