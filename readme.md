@@ -51,7 +51,8 @@
           access_log off
     }
     ```
-1. 同时需要配置 `/opt/kibana/config/kibana.yml`;
+1. ~~同时需要配置 `/opt/kibana/config/kibana.yml`;~~
+    > 不在需要。因为都创建 elk 容器的时候，指定了 `127.0.0.1:5601` 端口的映射
     ```
     # 只允许本地访问
     server.host: "localhost"
