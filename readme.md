@@ -9,8 +9,8 @@
 ## 服务端
 ### 安装 ELK
   > 这里使用 `sebp/elk` 镜像来安装
-1. `docker pull sebp/elk`
-1. `docker run -d -v /path/ElK/logstash/conf.d:/etc/logstash/conf.d -p 127.0.0.1:5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk`    
+1. `docker pull sebp/elk:651`
+1. `docker run -d -v /path/ElK/logstash/conf.d:/etc/logstash/conf.d -p 127.0.0.1:5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk:651`    
     > - 5601 (Kibana web interface). 这里做了 5601端口本地的映射限制，是为了搭配后面nginx的认证（如果不需要，则去掉 127.0.0.1）
     > - 9200 (Elasticsearch JSON interface).
     > - 5044 (Logstash Beats interface, receives logs from Beats such as Filebeat).
@@ -21,11 +21,11 @@
 ## 客户端
 ### filebeat 安装    
   > 客户端使用 `filebeat` 来搜集日志
-1. `docker pull prima/filebeat`
+1. `docker pull prima/filebeat:6.4.2`
 1. 配置文件 `filebeat.yml`
 1. 创建并启动容器 
     ```bash
-    docker run -d -v  /data/wwwroot/filebeat/filebeat.yml:/filebeat.yml -v /path/需要搜集的日志目录/logs:/home/logs --restart=always --name filebeat prima/filebeat
+    docker run -d -v  /data/wwwroot/filebeat/filebeat.yml:/filebeat.yml -v /path/需要搜集的日志目录/logs:/home/logs --restart=always --name filebeat prima/filebeat:6.4.2
     ```
     
 ## 通过nginx认证登录kibana
@@ -64,5 +64,5 @@
 1. `elasticsearch-plugin install  xxx`
     
 ### 本地命令备份    
-docker run -d -v /Users/caojinliang/Develop/ELK/logstash/conf.d:/etc/logstash/conf.d -p 5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk
-docker run -d -v /Users/caojinliang/Develop/ELK/filebeat.yml:/filebeat.yml -v /Users/caojinliang/Develop/ELK/logs:/home/logs --restart=always --name filebeat prima/filebeat
+docker run -d -v /Users/caojinliang/Develop/ELK/logstash/conf.d:/etc/logstash/conf.d -p 5601:5601 -p 9200:9200 -p 5044:5044 --restart=always -it --name elk sebp/elk:651
+docker run -d -v /Users/caojinliang/Develop/ELK/filebeat.yml:/filebeat.yml -v /Users/caojinliang/Develop/ELK/logs:/home/logs --restart=always --name filebeat prima/filebeat:6.4.2
