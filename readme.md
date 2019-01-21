@@ -6,6 +6,11 @@
     > Linux 需要修改系统 *sysctl vm.max_map_count* 参数
 1. Access to TCP port 5044 from log-emitting clients    
 
+## 相关文件
+ 主要是 logstash 的配置以及 filebeat 配置
+ > [https://github.com/839891627/ELK](https://github.com/839891627/ELK)
+
+
 ## 服务端
 ### 安装 ELK
   > 这里使用 `sebp/elk` 镜像来安装
