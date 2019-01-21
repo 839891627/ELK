@@ -48,7 +48,7 @@
              #proxy_connect_timeout 6500s;
              #proxy_read_timeout 6500s;
              auth_basic "secret";
-             auth_basic_user_file /usr/local/nginx/conf/kibana.passwd;
+             auth_basic_user_file /usr/local/nginx/conf/passwd/kibana.passwd;
              proxy_pass http://127.0.0.1:5601;
              proxy_set_header Host $host:5601;
              proxy_set_header X-Real-IP $remote_addr;
