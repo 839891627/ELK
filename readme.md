@@ -15,7 +15,7 @@
     > - 5601 (Kibana web interface). 这里做了 5601端口本地的映射限制，是为了搭配后面nginx的认证（如果不需要，则去掉 127.0.0.1）
     > - 9200 (Elasticsearch JSON interface).
     > - 5044 (Logstash Beats interface, receives logs from Beats such as Filebeat).
-1. 现在即可通过 `ip:host` 方式访问 Kibana web 后台了    
+1. 现在即可通过 `ip:port` 方式访问 Kibana web 后台了    
     > 后面会通过 nginx 做 web 认证登录
 
 
