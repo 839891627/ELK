@@ -1,0 +1,11 @@
+version: "3"
+services:
+  elk:
+    image: sebp/elk:651
+    container_name: elk
+    volumes:
+      - ./logstash/conf.d:/etc/logstash/conf.d
+    ports:
+      - 9200:9200
+      - 5601:5601
+      - 5044:5044

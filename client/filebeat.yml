@@ -23,7 +23,7 @@ filebeat.prospectors:
       server_name: "测试服务器"
 
 output.logstash:
-  hosts: ["172.17.0.2:5044"]
+  hosts: ["172.23.0.2:5044"]
 
 # 规避数据热点的优化参数：
 # 积累1024条消息才上报
