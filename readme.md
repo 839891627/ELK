@@ -31,6 +31,11 @@
 
 ```
 
+## 本地同时开启服务端和客户端的话
+```bash
+    docker network create elk_network
+```
+
 ## 服务端
 ### 安装 ELK
 在  `server` 目录下，`composer-compose up -d`

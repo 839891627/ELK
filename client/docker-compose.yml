@@ -8,8 +8,8 @@ services:
       - ./filebeat.yml:/filebeat.yml
       - ./logs:/home/logs
     networks:
-      - server_default # 本地测试的时候，这里需要添加网络设置， server_default 是由服务端 server 目录下 docker-compose up 起服务时自动创建的网络
+      - elk_network # 本地测试的时候，这里需要添加网络设置， elk_network 是由服务端 server 目录下 docker-compose up 起服务时自动创建的网络
 
 networks:
-  server_default: # 本地测试的时候，这里需要添加网络设置， server_default 是由服务端 server 目录下 docker-compose up 起服务时自动创建的网络
+  elk_network: # 本地测试的时候，这里需要添加网络设置， elk_network 是由服务端 server 目录下 docker-compose up 起服务时自动创建的网络
     external: true

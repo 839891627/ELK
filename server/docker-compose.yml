@@ -6,6 +6,14 @@ services:
     volumes:
       - ./logstash/conf.d:/etc/logstash/conf.d
     ports:
-      - 9200:9200
       - 5601:5601
-      - 5044:5044
+    expose:
+      - 5044
+      - 9200
+    networks:
+      - elk_network # 本地测试的时候，这里需要添加网络设置， elk_network 是由服务端 server 目录下 docker-compose up 起服务时自动创建的网络
+
+
+networks:
+  elk_network: # 本地测试的时候，这里需要添加网络设置， elk_network 是由服务端 server 目录下 docker-compose up 起服务时自动创建的网络
+    external: true
